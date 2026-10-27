@@ -1,0 +1,154 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Electricity Bill Calculator</title>
+  <link rel="stylesheet" href="./style.css">
+</head>
+<body>
+  <main class="page">
+    <header class="site-header">
+      <a class="brand" href="/" aria-label="Electricity billing home">
+        <span class="brand-mark">⚡</span>
+        <span>Volt<span class="brand-light">Bill</span></span>
+      </a>
+      <span class="header-label"><span class="status-dot"></span> BILLING PORTAL</span>
+    </header>
+
+    <section class="hero">
+      <div class="hero-copy">
+        <p class="eyebrow">SIMPLE • CLEAR • TRANSPARENT</p>
+        <h1>Electricity billing,<br><span>made simpler.</span></h1>
+        <p class="hero-description">Enter your consumer details and meter readings to generate a clear breakdown of your electricity bill.</p>
+        <div class="hero-points">
+          <span><span class="check">✓</span> Instant calculation</span>
+          <span><span class="check">✓</span> Itemized bill</span>
+          <span><span class="check">✓</span> Print-ready summary</span>
+        </div>
+      </div>
+      <div class="hero-art" aria-hidden="true">
+        <div class="orbit orbit-one"></div><div class="orbit orbit-two"></div>
+        <div class="bolt-card"><span>⚡</span></div>
+        <div class="float-chip chip-top">Energy usage <strong>Tracked</strong></div>
+        <div class="float-chip chip-bottom"><span class="mini-dot"></span> Bill estimate <strong>Ready</strong></div>
+      </div>
+    </section>
+
+    <section class="form-layout">
+      <form class="form-card" action="/bill" method="post">
+        <div class="card-heading">
+          <div>
+            <p class="eyebrow">STEP 01 / DETAILS</p>
+            <h2>Consumer information</h2>
+            <p>Fill in the details shown on your meter or consumer record.</p>
+          </div>
+          <span class="heading-icon">▤</span>
+        </div>
+
+        <div class="form-grid">
+          <div class="field">
+            <label for="consumerNo">Consumer number <span>*</span></label>
+            <input id="consumerNo" name="consumerNo" type="text" maxlength="60" placeholder="e.g. CON-10245" required>
+          </div>
+          <div class="field">
+            <label for="name">Consumer name <span>*</span></label>
+            <input id="name" name="name" type="text" maxlength="100" placeholder="Full name" required>
+          </div>
+          <div class="field full-width">
+            <label for="address">Address <span>*</span></label>
+            <input id="address" name="address" type="text" maxlength="200" placeholder="House number, street, area" required>
+          </div>
+          <div class="field full-width">
+            <label for="meterNo">Meter number <span>*</span></label>
+            <input id="meterNo" name="meterNo" type="text" maxlength="60" placeholder="Enter meter number" required>
+          </div>
+        </div>
+
+        <div class="form-divider"></div>
+        <div class="card-heading readings-heading">
+          <div>
+            <p class="eyebrow">STEP 02 / USAGE</p>
+            <h2>Meter readings</h2>
+            <p>Use non-negative whole numbers from your meter.</p>
+          </div>
+          <span class="heading-icon">⌁</span>
+        </div>
+
+        <div class="form-grid">
+          <div class="field">
+            <label for="previousReading">Previous reading <span>*</span></label>
+            <div class="input-with-unit">
+              <input id="previousReading" name="previousReading" type="number" min="0" step="1" placeholder="e.g. 1200" required>
+              <span>kWh</span>
+            </div>
+          </div>
+          <div class="field">
+            <label for="currentReading">Current reading <span>*</span></label>
+            <div class="input-with-unit">
+              <input id="currentReading" name="currentReading" type="number" min="0" step="1" placeholder="e.g. 1380" required>
+              <span>kWh</span>
+            </div>
+          </div>
+        </div>
+
+        <div class="field late-field">
+          <label>Is this bill being paid after the due date? <span>*</span></label>
+          <div class="radio-options">
+            <label class="radio-card"><input type="radio" name="late" value="0" checked><span class="radio-custom"></span><span><strong>No</strong><small>No late fee</small></span></label>
+            <label class="radio-card"><input type="radio" name="late" value="1"><span class="radio-custom"></span><span><strong>Yes</strong><small>₹50 late fee</small></span></label>
+          </div>
+        </div>
+
+        <div class="form-error" id="readingError" role="alert" hidden>Current reading cannot be less than previous reading.</div>
+        <button class="button primary submit-button" type="submit">Generate electricity bill <span>→</span></button>
+        <p class="privacy-note">Your entries are used to generate this bill in this local demo.</p>
+      </form>
+
+      <aside class="side-column">
+        <div class="summary-card">
+          <div class="summary-top">
+            <span class="summary-icon">✦</span>
+            <span class="summary-tag">SAMPLE TARIFF</span>
+          </div>
+          <h3>How charges are calculated</h3>
+          <p>Energy charges use the same unit slabs as your original Java program.</p>
+          <div class="tariff-row"><span>First 100 units</span><strong>₹2.00 / unit</strong></div>
+          <div class="tariff-row"><span>101–300 units</span><strong>₹3.00 / unit</strong></div>
+          <div class="tariff-row"><span>Above 300 units</span><strong>₹5.00 / unit</strong></div>
+          <div class="tariff-row"><span>Fixed charge</span><strong>₹100.00</strong></div>
+          <div class="tariff-row"><span>Tax</span><strong>5% of energy</strong></div>
+          <div class="tariff-row"><span>Late fee (if applicable)</span><strong>₹50.00</strong></div>
+        </div>
+        <div class="help-card">
+          <div class="help-icon">i</div>
+          <div><h3>Before you continue</h3><p>Current meter reading must be greater than or equal to the previous reading. The due date is set to 15 days after the bill date.</p></div>
+        </div>
+      </aside>
+    </section>
+
+    <footer class="site-footer">
+      <span>⚡ VoltBill <span class="muted">Electricity billing demo</span></span>
+      <span>Built with Java, HTML &amp; CSS</span>
+    </footer>
+  </main>
+  <script>
+    const form = document.querySelector("form");
+    const previous = document.getElementById("previousReading");
+    const current = document.getElementById("currentReading");
+    const error = document.getElementById("readingError");
+    form.addEventListener("submit", function (event) {
+      if (previous.value !== "" && current.value !== "" &&
+          Number(current.value) < Number(previous.value)) {
+        event.preventDefault();
+        error.hidden = false;
+        current.focus();
+      } else {
+        error.hidden = true;
+      }
+    });
+    current.addEventListener("input", () => { error.hidden = true; });
+    previous.addEventListener("input", () => { error.hidden = true; });
+  </script>
+</body>
+</html>
